@@ -17,13 +17,20 @@ public class Mailreader {
         List<Mail> list= new  ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
-            while(true){
+            IteratorReader iteratorreader = new IteratorReader(reader);
+            
+            for(String Line : iteratorreader){
+                if(Mail.isMail(Line)){
+                    list.add(new Mail(Line));
+                }
+            }
+            /*while(true){
                 String line = reader.readLine();
                 if(line==null)
                     break;
                 if(Mail.isMail(line))
                     list.add(new Mail(line));
-            }
+            }*/
             
         }catch(FileNotFoundException exception){
             System.out.println("Error: MailReader FileNotFound");
